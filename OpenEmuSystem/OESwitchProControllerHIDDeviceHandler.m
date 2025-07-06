@@ -64,7 +64,8 @@ typedef NS_ENUM(uint8_t, OEHACOuputReportID) {
     OEHACOutputReportIDNFCIRFirmwareUpdatePacket = 0x03,
     OEHACOutputReportIDRumble = 0x10,
     OEHACOutputReportIDNFCIR = 0x11,
-    OEHACOutputReportIDUSBSubcommand = 0x80
+    OEHACOutputReportIDUSBSubcommand = 0x80,
+    OEHACOutputReportIDUSBSubcommandReply = 0x81
 };
 
 
@@ -736,7 +737,7 @@ static CGFloat OEHACScaleValueWithCalibration(
             return NO;
         }
         const OEHACUSBAcknowledgmentOutputReport *response = respData.bytes;
-        if (response->reportID != OEHACInputReportIDUSBSubcommandReply) {
+        if (response->reportID != OEHACOutputReportIDUSBSubcommandReply) {
             NSLog(@"[dev %p] Invalid ACK from controller (USB subcommand %02X)", self, cmdid);
             return NO;
         }
